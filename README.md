@@ -110,4 +110,96 @@ methods: {
 组件设计的原则
 页面上每个独立的可视/可交互的区域视为一个组件
 每个组件对应一个工程目录，组件所需要的各种资源在这个目录下就近维护
-页面不过是组件的容器，组件
+页面不过是组件的容器，组件可以嵌套自由组合并形成完整的页面
+$cnpm install -g vue-cli
+$vue init <template-name> <project>
+注：创建一个空文件目录时，如果要提交的github时，会被忽略，如果要提交，可以在当前文件夹下新建文件.gitkeep文件即可。
+数据接口的mock,在express中使用router的方式：
+```
+// 数据mock
+var appData = require('../static/data.json')
+var seller = appData.seller
+var goods = appData.goods
+var ratings = appData.ratings
+
+var apiRoutes = express.Router()
+
+apiRoutes.get('/seller', function(req, res) {
+  res.json({
+    errno: 0,
+    data: seller
+  })
+})
+
+apiRoutes.get('/goods', function(req, res) {
+  res.json({
+    errno: 0,
+    data: goods
+  })
+})
+
+apiRoutes.get('/ratings', function(req, res) {
+  res.json({
+    errno: 0,
+    data: ratings
+  })
+})
+
+app.use('/api', apiRoutes)
+```
+注：flex=1;的布局技巧分析,作用是等分父容器：
+```
+.item {
+	flex: 1;
+}
+等同于：
+.item {
+	flex-grow: 1;
+	flex-shrink: 1;
+	flex-basis: 0%;
+}
+```
+vue-loader中的postcss插件的作用是用来解决兼容性的写法的添加。
+
+如何设置默认路由：
+使用router.push('/goods');//在main.js中设置即可；
+a链接元素的自动填充父元素的方法是：display:block;
+注：
+下划线的书写：
+```
+引用方式：
+border-1px(rgba(7, 17, 27, 0.1))
+实现方式：
+border-1px($color)
+  position relative
+  &:after
+    display block
+    position absolute
+    left 0
+    bottom 0
+    width 100%
+    border-top: 1px solid $color
+    content: ''
+```
+页面中图片的模糊的处理：
+```
+<div class="background">
+      <img :src="seller.avatar" width='100%' height='100%'>
+</div>
+css编辑：
+.background
+  filter blur(10px)
+```
+backdrop-filter和filter的区别：最早的SVG上得到的filte效果，只能用到SVG元素上; 而filter上使用的元素，会直接影响其后代所有的元素。那么问题来了，如果只需要对元素的背景做filter效果，那么可以使用
+backdrop-filter的作用。注：http://www.w3cplus.com/css3/advanced-css-filters.html
+使用backdrop-filter事项
+运用backdrop-filter元素的背景应该使用半透明，不然永远看不到效果
+当backdrop-filter属性和裁剪属性(如border-radius，mask,clip-path)等结合在一起使用时，会有bug产生。
+backdrop-filter可以创建一个堆栈文本(Stacking context)，类似于Opacity属性一样
+可以配合动画属性animation一起使用
+到目前为止，仅有Safari浏览器支持，而且还需要添加前缀: -webkit-backdrop-filter，如果使用autofixer这样的插件，无需考虑前缀相关支持。
+规范中定义的过滤函数
+和background-size属性一起使用会有Bug
+支持动画
+需要添加前缀：-webkit-filter()
+值得一提的是，backdrop-filter和filter()可以使用CSS3的transition和animation实现一些圆滑的过度效果或动画，甚至还可以使用JavaScript。
