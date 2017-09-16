@@ -39,7 +39,7 @@
           <div class="detail-main">
             <h1 class="name">{{seller.name}}</h1>
             <div class="star-wrapper">
-              <!-- <star :size='48' :score='seller.score'></star> -->
+              <star :size='48' :score='seller.score'></star>
             </div>
             <div class="title">
               <div class="line"></div>
@@ -47,7 +47,7 @@
               <div class="line"></div>
             </div>
             <ul v-if="seller.supports" class="supports">
-              <li class="support-item" v-for="item in seller.supports">
+              <li class="support-item" v-for="item in seller.supports" :key="item.id">
                 <span class="icon" :class="iconClassMap[item.type]"></span>
                 <span class="text">{{item.description}}</span>
               </li>
@@ -69,6 +69,7 @@
 </template>
 
 <script>
+import star from 'components/star/star'
 export default {
   data () {
     return {
@@ -90,6 +91,9 @@ export default {
     hideDetail: function () {
       this.detailShow = false
     }
+  },
+  components: {
+    star
   }
 }
 </script>
