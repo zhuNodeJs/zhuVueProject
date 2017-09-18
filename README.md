@@ -203,3 +203,68 @@ backdrop-filter可以创建一个堆栈文本(Stacking context)，类似于Opaci
 支持动画
 需要添加前缀：-webkit-filter()
 值得一提的是，backdrop-filter和filter()可以使用CSS3的transition和animation实现一些圆滑的过度效果或动画，甚至还可以使用JavaScript。
+###### 评论也中的星星的实现方式
+核心的思想是：定义一个result的数组，将计算生成的类添加到数组中，然后再通过v-for循环生成含有相应的类的元素，
+然后在类中添加背景background-image即可。
+```
+<style lang="stylus" scoped>
+@import '../../common/stylus/mixin'
+  .star
+    .star-item
+      display inline-block
+      background-repeat no-repeat
+    &.star-48
+      .star-item
+        width 20px
+        height 20px
+        margin-right 22px
+        background-size 100% 100%
+        &:last-child
+          margin-right 0
+        &.on
+          bg-img('star48_on')
+        &.half
+          bg-img('star48_half')
+        &.off
+          bg-img('star48_off')
+    &.star-36
+      .star-item
+        width 20px
+        height 20px
+        margin-right 22px
+        background-size 100% 100%
+        &:last-child
+          margin-right 0
+        &.on
+          bg-img('star36_on')
+        &.half
+          bg-img('star36_half')
+        &.off
+          bg-img('star36_off')
+    &.star-24
+      .star-item
+        width 20px
+        height 20px
+        margin-right 22px
+        background-size 100% 100%
+        &:last-child
+          margin-right 0
+        &.on
+          bg-img('star24_on')
+        &.half
+          bg-img('star24_half')
+        &.off
+          bg-img('star24_off')
+</style>
+```
+即可。
+header组件中跳转的效果的代码为：
+```
+&.fade-enter-active, &.fade-leave-active {
+      transition: opacity .5s
+    }
+&.fade-enter, &.fade-leave-active {
+     opacity : 0
+    }
+```
+
