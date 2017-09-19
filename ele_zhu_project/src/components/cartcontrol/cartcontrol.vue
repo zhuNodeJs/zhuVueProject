@@ -14,16 +14,26 @@
 </div>
 </template>
 <script>
+import Vue from 'vue'
 export default {
   props: {
     food: Object
   },
   methods: {
     decreaseCart () {
-
+      if (!event._constructed || !this.food.count) {
+        return
+      }
+      this.food.count--
     },
     addCart (event) {
-
+      if (!event._constructed) {
+        return
+      }
+      if (!this.food.count) {
+        Vue.set(this.food, 'count', 0)
+      }
+      this.food.count++
     }
   }
 }
@@ -39,6 +49,16 @@ export default {
           font-size 24px
           color rgb(0, 160, 220)
           transition all .4s linear
+        &.fadeRotate-enter-active, &.fadeRotate-leave-active
+          trasfrom translate3d(0, 0, 0)
+          .inner
+            display inline-block
+            transform rotate(0)
+        &.fadeRotate-enter, &.fadeRotate-leave-active
+          opacity 0
+          transform translate3d(24px, 0, 0)
+          .inner
+            transform rotate(180deg)
     .cart-count
       display inline-block
       vertical-align top
