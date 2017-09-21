@@ -27,13 +27,16 @@ export default {
       this.food.count--
     },
     addCart (event) {
-      if (!event._constructed) {
+      if (!event._constructed) { // 去除自带click的事件
         return
       }
       if (!this.food.count) {
         Vue.set(this.food, 'count', 0)
       }
+      console.log('before', this.food.count)
       this.food.count++
+      console.log('after', this.food.count)
+      this.$root.eventHub.$emit('cart.add', event.target)
     }
   }
 }
@@ -44,21 +47,20 @@ export default {
       display inline-block
       padding 6px
       transition all .4s linear
+      .inner
+        line-height 24px
+        font-size 24px
+        color rgb(0, 160, 220)
+        transition all .4s linear
+      &.fadeRotate-enter-active, &.fadeRotate-leave-active
+        transform translate3d(0, 0, 0)
         .inner
-          line-height 24px
-          font-size 24px
-          color rgb(0, 160, 220)
-          transition all .4s linear
-        &.fadeRotate-enter-active, &.fadeRotate-leave-active
-          trasfrom translate3d(0, 0, 0)
-          .inner
-            display inline-block
-            transform rotate(0)
-        &.fadeRotate-enter, &.fadeRotate-leave-active
-          opacity 0
-          transform translate3d(24px, 0, 0)
-          .inner
-            transform rotate(180deg)
+          display inline-block
+          transform  rotate(0)
+      &.fadeRotate-enter, &.fadeRotate-leave-active
+        transform translate3d(24px, 0, 0)
+        .inner
+          transform rotate(180deg)
     .cart-count
       display inline-block
       vertical-align top

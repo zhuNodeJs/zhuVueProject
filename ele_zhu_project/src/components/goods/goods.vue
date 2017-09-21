@@ -39,6 +39,7 @@
       </li>
     </ul>
   </div>
+  <shopCart :deliveryPrice='seller.deliveryPrice' :minPrice='seller.minPrice' :selectFoods='selectFoods'></shopCart>
 </div>
 </template>
 
@@ -47,8 +48,12 @@ import axios from 'axios'
 import iconMap from 'components/iconMap/iconMap'
 import BScroll from 'better-scroll'
 import cartcontrol from 'components/cartcontrol/cartcontrol'
+import shopCart from 'components/shopCart/shopCart'
 
 export default {
+  props: {
+    seller: Object
+  },
   data () {
     return {
       goods: [],
@@ -67,11 +72,23 @@ export default {
         }
       }
       return 0
+    },
+    selectFoods () {
+      let foods = []
+      this.goods.forEach((good) => {
+        good.foods.forEach((food) => {
+          if (food.count) {
+            foods.push(food)
+          }
+        })
+      })
+      return foods
     }
   },
   components: {
     iconMap,
-    cartcontrol
+    cartcontrol,
+    shopCart
   },
   created () {
     axios.get('static/data.json').then((res) => {
