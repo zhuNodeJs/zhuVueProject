@@ -1,7 +1,7 @@
 <template>
 <div class="cartcontrol">
   <transition name="fadeRotate">
-    <div class="cart-decrease" v-show="food.count > 0" @click.stop.prevent = 'decreaseCart()'>
+    <div class="cart-decrease" v-show="food.count > 0" @click.stop.prevent='decreaseCart()'>
       <span class="icon-remove_circle_outline inner"></span>
     </div>
   </transition>
@@ -33,9 +33,7 @@ export default {
       if (!this.food.count) {
         Vue.set(this.food, 'count', 0)
       }
-      console.log('before', this.food.count)
       this.food.count++
-      console.log('after', this.food.count)
       this.$root.eventHub.$emit('cart.add', event.target)
     }
   }
@@ -58,6 +56,7 @@ export default {
           display inline-block
           transform  rotate(0)
       &.fadeRotate-enter, &.fadeRotate-leave-active
+        opacity 0
         transform translate3d(24px, 0, 0)
         .inner
           transform rotate(180deg)

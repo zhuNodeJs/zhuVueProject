@@ -54,6 +54,9 @@
         </div>
       </transition>
     </div>
+    <transition name="fade-backdrop">
+      <div class="backdrop" v-show="showBackdrop" @click="hideBackdrop"></div>
+    </transition>
   </div>
 </template>
 <script>
@@ -126,10 +129,18 @@ export default {
       } else {
         return '去结算'
       }
+    },
+    showBackdrop () {
+      if (this.listShow && this.totalPrice) {
+        return true
+      }
+      this.listShow = false
+      return false
     }
   },
   methods: {
     setEmpty () {
+      console.log(1)
       this.selectFoods.forEach((food) => {
         food.count = 0
       })
@@ -156,6 +167,9 @@ export default {
       this.foodlistScroll = new BScroll(this.$refs.foodlist, {
         click: true
       })
+    },
+    hideBackdrop () {
+      this.listShow = false
     }
   },
   components: {
@@ -303,6 +317,17 @@ export default {
         .cartcontrol-wrapper
           font-size 14px
           margin-top 6px
-
-
+.backdrop
+  position fixed
+  top 0
+  bottom 0
+  left 0
+  right 0
+  background rgba(7, 17, 27, 0.6)
+  backdrop-filter blur(10px)
+  z-index 40
+  &.fade-backdrop-enter-active, &.fade-backdrop-leave-active
+    transition opacity 0.5s
+  &.fade-backdrop-enter, &.fade-backdrop-leave-active
+    opacity 0
 </style>
