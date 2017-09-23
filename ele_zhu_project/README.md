@@ -166,4 +166,24 @@ methods: {
 ```
 Vue实现响应式并不是数据发生变化之后DOM立即变化，而是按一定的策略进行DOM的更新。
 $nextTick是在下次DOM更新循环结束之后执行延迟回调，在修改数据之后使用$nextTick，则可以在回调中获取更新后的DOM，.
+4. 使用getBoundingClientRect()来获取页面元素的位置
+· 对于动画效果的实现，避免使用setTimeout或setInterval, 请使用requestAnimationFrame
+· 把耗时长的Javascript代码放到Web Worker中去做
+· 把DOM元素的更新划分为多个小任务，分别在多个frame中去完成
+·使用Chrome DevTools的Timeline 和 Javascript Profile 来分析Javascript的性能
+```
+[code=”javascript”]var _x = 0, _y = 0;
+do{
+_x += el.offsetLeft;
+_y += el.offsetTop;
+}while(el=el.offsetParent);
+return {x:_x,y:_y};[/code]
+```
+这里有个‘offsetParent’问题，所以要写很多的兼容的代码, 该方法获得页面中的某个元素的左，上，右，和 下分别相对浏览器视窗的位置，他返回的是一个对象，即Object，该对象有四个属性：top, left, right, bottom ,这里的top， left和css中的理解很相似，但是right，bottom和css中的理解有点不一样。
+以前getBoundingClientRect()是IE特有的，目前FF3+，opera9.5+，safari 4，都已经支持这个方法。
+有了这个方法，获取页面元素的位置就简单多了
+var X= this.getBoundingClientRect().left+document.documentElement.scrollLeft;
+var Y =this.getBoundingClientRect().top+document.documentElement.scrollTop;
+总结来说是：边框离浏览器的距离。
+
 
