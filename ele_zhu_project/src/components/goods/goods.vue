@@ -40,6 +40,7 @@
     </ul>
   </div>
   <shopCart :deliveryPrice='seller.deliveryPrice' :minPrice='seller.minPrice' :selectFoods='selectFoods'></shopCart>
+  <foodDetail :food='selectedFood' v-if="selectedFood" ref="myFood"></foodDetail>
 </div>
 </template>
 
@@ -49,6 +50,7 @@ import iconMap from 'components/iconMap/iconMap'
 import BScroll from 'better-scroll'
 import cartcontrol from 'components/cartcontrol/cartcontrol'
 import shopCart from 'components/shopCart/shopCart'
+import foodDetail from 'components/foodDetail/foodDetail'
 
 export default {
   props: {
@@ -88,7 +90,8 @@ export default {
   components: {
     iconMap,
     cartcontrol,
-    shopCart
+    shopCart,
+    foodDetail
   },
   created () {
     axios.get('static/data.json').then((res) => {
