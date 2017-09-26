@@ -15,7 +15,7 @@
       <li v-for="item in goods" :key="item.id" class="food-list food-list-hook">
           <h1>{{item.name}}</h1>
           <ul>
-            <li v-for="food in item.foods" :key="food.id" class="food-item">
+            <li v-for="food in item.foods" :key="food.id" class="food-item" @click="goDetail(food)">
               <div class="icon">
                 <img :src="food.icon" alt="" width="57" height="57" />
               </div>
@@ -132,6 +132,12 @@ export default {
         height += item.clientHeight
         this.listHeight.push(height)
       }
+    },
+    goDetail (food) {
+      this.selectedFood = food
+      this.$nextTick(() => {
+        this.$refs.myFood.showToggle()
+      })
     }
   }
 }
