@@ -190,4 +190,76 @@ export default {
       color rgb(77,85,93)
       line-height 24px
       padding 0 8px
+  .evaluation
+    padding 18px 0
+    position relative
+    .title
+      padding-left 18px
+      font-size 14px
+      font-weight 500
+      color #07111b
+    .classify
+      padding 18px 0
+      margin 0 18px
+      border-bottom 1px solid rgba(7,17,27,0.1)
+      .item
+        display inline-block
+        font-size 12px
+        padding 8px 12px
+        line-height 16px
+        background rgba(0, 160,220,0.2)
+        color rgb(77,85,95)
+        margin-right 8px
+      .count 
+        font-size 8px
+        padding-left 2px
+      &.active
+        color white
+        background rgb(0,169,220)
+      &.bad
+        background rgba(77,85,93,0.2)
+      &.badActive
+        background #4d555d
+    .switch
+      font-size .75rem
+      width 100%
+      padding .75rem 0 .75rem 1.125rem
+      color rgb(147,153,159)
+      border-bottom 1px solid rgba(7,17,27,0.1)
+      .icon-check_circle
+        font-size 1.5rem
+        vertical-align middle
+        &.on
+          color #00c850
+    .evel-list
+      padding 16px 0
+      border-bottom 1px solid rgba(7,17,27,0.1)
+      .userInfo
+        display flex
+        color rgb(147,153,159)
+        font-size .625rem 
+        line-height .75rem /* 12/16 */
+        .time
+          flex 1
+        .user
+          flex 1
+          text-align right 
+          .avatar
+           img 
+            padding-left .375rem /* 6/16 */
+            border-radius 50%
+      .content
+        padding-top .375rem /* 6/16 */
+        .icon
+          font-size .75rem /* 12/16 */
+          line-height 1.5rem /* 24/16 */
+          &.icon-thumb_up
+            color rgb(0,160,220)
+          &.icon-thumb_down
+            color rgb(147,153,159)
+        .text
+          font-size .75rem /* 12/16 */
+          color rgb(7,17,27)
+          line-height 1rem /* 16/16 */
+          padding-left .25rem /* 4/16 */
 </style>
