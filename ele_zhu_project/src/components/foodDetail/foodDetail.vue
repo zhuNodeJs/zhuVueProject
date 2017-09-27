@@ -67,13 +67,52 @@
 <script>
 import cartcontrol from 'components/cartcontrol/cartcontrol'
 import BScroll from 'better-scroll'
+import '../../filter/time.js'
 export default {
   props: {
-    food: Object,
-    showDetail: false
+    food: Object
   },
   components: {
     cartcontrol
+  },
+  data () {
+    return {
+      showDetail: false,
+      classifyArr: [
+        {
+          name: '全部',
+          count: this.food.ratings.length,
+          active: true
+        },
+        {
+          name: '推荐',
+          count: this.food.ratings.filter((data) => data.rateType === 0).length,
+          active: false
+        },
+        {
+          name: '吐槽',
+          count: this.food.ratings.filter((data) => data.rateType).length,
+          active: false
+        }
+      ],
+      evelflag: false
+    }
+  },
+  computed: {
+    evelArr () {
+      let selectIndex = 0
+      this.classifyArr.forEach((data, index) => {
+        if (data.active) {
+          selectIndex = index  // 当哪个active为true时，则index的值赋给selectIndex;
+        }
+      })
+      if (this.detailWrapper) {
+        this.$nextTick(() => {
+          this.detailWrapper.refresh()
+        })
+      }
+      return selectIndex ? this.food.ratings.filter((data) => this.evelflag ? data.rateType === selectIndex - 1 && data.text : data.rateType === selectIndex - 1) : this.food.ratings.filter((data) => this.evelflag ? data.text : true)
+    }
   },
   methods: {
     showToggle () {
@@ -92,6 +131,20 @@ export default {
       } else {
         this.detailWrapper.refresh()
       }
+    },
+    addCart (event) {
+      console.log(event)
+      if (!event._constructed) {
+        return
+      }
+      this.$set(this.food, 'count', 1)
+      this.$root.eventHub.$emit('cart.add', event.target)
+    },
+    filterEval (item) {
+      this.classifyArr.forEach((data) => {
+        data.active = false
+      })
+      item.active = true
     }
   }
 }
@@ -210,56 +263,58 @@ export default {
         background rgba(0, 160,220,0.2)
         color rgb(77,85,95)
         margin-right 8px
-      .count 
-        font-size 8px
-        padding-left 2px
-      &.active
-        color white
-        background rgb(0,169,220)
-      &.bad
-        background rgba(77,85,93,0.2)
-      &.badActive
-        background #4d555d
+        .count
+          font-size 8px
+          padding-left 2px
+        &.active
+          color white
+          background rgb(0,169,220)
+        &.bad
+          background rgba(77,85,93,0.2)
+        &.badActive
+          background #4d555d
     .switch
-      font-size .75rem
+      font-size 12px
       width 100%
-      padding .75rem 0 .75rem 1.125rem
+      padding 12px 0 12px 18px
       color rgb(147,153,159)
       border-bottom 1px solid rgba(7,17,27,0.1)
       .icon-check_circle
-        font-size 1.5rem
+        font-size 24px
         vertical-align middle
         &.on
           color #00c850
     .evel-list
-      padding 16px 0
-      border-bottom 1px solid rgba(7,17,27,0.1)
-      .userInfo
-        display flex
-        color rgb(147,153,159)
-        font-size .625rem 
-        line-height .75rem /* 12/16 */
-        .time
-          flex 1
-        .user
-          flex 1
-          text-align right 
-          .avatar
-           img 
-            padding-left .375rem /* 6/16 */
-            border-radius 50%
-      .content
-        padding-top .375rem /* 6/16 */
-        .icon
-          font-size .75rem /* 12/16 */
-          line-height 1.5rem /* 24/16 */
-          &.icon-thumb_up
-            color rgb(0,160,220)
-          &.icon-thumb_down
-            color rgb(147,153,159)
-        .text
-          font-size .75rem /* 12/16 */
-          color rgb(7,17,27)
-          line-height 1rem /* 16/16 */
-          padding-left .25rem /* 4/16 */
+      margin 0 18px
+      .evel
+        padding 16px 0
+        border-bottom 1px solid rgba(7,17,27,0.1)
+        .userInfo
+          display flex
+          color rgb(147,153,159)
+          font-size 10px
+          line-height 12px
+          .time
+            flex 1
+          .user
+            flex 1
+            text-align right
+            .avatar
+              img
+                padding-left 6px
+                border-radius 50%
+        .content
+          padding-top 6px
+          .icon
+            font-size 12px
+            line-height 24px
+            &.icon-thumb_up
+              color rgb(0,160,220)
+            &.icon-thumb_down
+              color rgb(147,153,159)
+          .text
+            font-size 12px
+            color rgb(7,17,27)
+            line-height 16px
+            padding-left 4px
 </style>
