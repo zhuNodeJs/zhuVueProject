@@ -63,12 +63,12 @@ export default {
           bg-img('star48_off')
     &.star-36
       .star-item
-        width 20px
-        height 20px
-        margin-right 22px
+        width 15px
+        height 15px
+        margin-right 6px
         background-size 100% 100%
         &:last-child
-          margin-right 0
+          margin-right 8px
         &.on
           bg-img('star36_on')
         &.half
@@ -77,9 +77,9 @@ export default {
           bg-img('star36_off')
     &.star-24
       .star-item
-        width 20px
-        height 20px
-        margin-right 22px
+        width 10px
+        height 10px
+        margin-right 3px
         background-size 100% 100%
         &:last-child
           margin-right 0

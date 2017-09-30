@@ -133,7 +133,6 @@ export default {
       }
     },
     addCart (event) {
-      console.log(event)
       if (!event._constructed) {
         return
       }
