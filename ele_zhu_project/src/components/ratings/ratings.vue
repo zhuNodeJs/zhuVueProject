@@ -39,7 +39,26 @@
       <div class="evel-list">
         <ul>
           <li class="evel" v-for="evel in evelArr" :key="evel.id">
-
+            <div class="avator">
+              <img :src="evel.avator" width="28" height="28" alt="">
+            </div>
+            <div class="content">
+              <div class="user">
+                <span class="name">{{evel.username}}</span>
+                <span class="rateTime">{{evel.rateTime | time}}</span>
+              </div>
+              <div class="star-wrapper">
+                <star :size='24' :score='evel.score'></star>
+                <span class="deliveryTime">{{evel.deliveryTime}}分钟送达</span>
+              </div>
+              <div class="text">
+                {{evel.text}}
+              </div>
+              <div class="recommand">
+                <span class="icon icon-thumb_up" v-show="evel.recommend.length"></span>
+                <span class="dish" v-for="dish in evel.recommend" :key="dish.id">{{dish}}</span>
+              </div>
+            </div>
           </li>
         </ul>
       </div>
