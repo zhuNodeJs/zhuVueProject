@@ -99,6 +99,9 @@ export default {
   created () {
     this.initData()
   },
+  computed: {
+
+  },
   methods: {
     filterEvel (item) {
       this.classifyArr.forEach((data) => {
@@ -220,5 +223,10 @@ export default {
         vertical-align middle
         &.on
           color #00c850
-
+    .evel-list
+      .evel
+        display flex
+        padding 18px 0
+        margin 0 18px
+        border-bottom 1px solid rgba(7, 17, 27, 0.1)
 </style>
