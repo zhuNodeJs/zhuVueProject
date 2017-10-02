@@ -1,18 +1,28 @@
 <!DOCTYPE html>
-<html ng-app='workflow'>
+<html>
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
 		<meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="Cache" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta content="yes" name="apple-mobile-web-app-capable">
     <meta content="yes" name="apple-touch-fullscreen">
     <meta content="telephone=no,email=no" name="format-detection">
     <meta content="fullscreen=yes,preventMove=no" name="ML-Config">
 		<meta name="viewport" content="initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-  
+    <link rel="stylesheet" type="text/css" href="lib/ionic/css/ionic.min.css"/>
+    <link rel="stylesheet" type="text/css" href="stylesheets/common.css"/>    
 	</head>
-	<body>
+	<body ng-app='workflow'>
+	  
+	  <ion-nav-view></ion-nav-view>
+	  
+	  <script src="lib/ionic/js/ionic.bundle.min.js" type="text/javascript" charset="utf-8"></script>
+	  <script src="lib/config.js" type="text/javascript" charset="utf-8"></script>
+	  <script src="js/app.js" type="text/javascript" charset="utf-8"></script>
+	  <script src="lib/NAZA_lib.js" type="text/javascript" charset="utf-8"></script>
+	  <script src="js/controllers/mainController.js" type="text/javascript" charset="utf-8"></script>
 	</body>
 </html>
