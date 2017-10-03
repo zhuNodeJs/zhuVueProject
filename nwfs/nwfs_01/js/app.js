@@ -1,5 +1,4 @@
 angular.module('workflow', ['ionic'])
-<<<<<<< HEAD
   .config(['$stateProvider', '$urlRouterProvider', '$ionicConfigProvider',function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
     //fix that ion-scroll doesn't work on android.
     $ionicConfigProvider.scrolling.jsScrolling(true);
@@ -25,8 +24,3 @@ angular.module('workflow', ['ionic'])
     
     $urlRouterProvider.otherwise('/main')
   }]);
-=======
-	.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
-		
-	})
->>>>>>> 94e09c5a5ea54f93b7910c6e5353596781d1f7a4

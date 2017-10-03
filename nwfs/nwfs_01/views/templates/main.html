@@ -1,4 +1,15 @@
-<ion-view>
+<!--工作流首页 -- 进行中(待我审批, 已完成) 已完成(我审批的，我提交的)-->
+<ion-view ios-view view-title='工作流' class='workflowIndex'>
+	<ion-header-bar align-title="center" class="bar-positive">
+        <button class="button icon-left ion-ios-arrow-left button-clear btn-dp" ng-click="goBack()">
+        </button>
+            <h1 class="title" ng-click="showTopMod()"><span class="title_msg" ng-bind="showProcessMsg"></span><i class="icon ion-ios-arrow-down" ng-class="{'myRotate_0_180':isShowSelMod,'myRotate_180_0':!isShowSelMod}"></i></h1>
+            <button class="button icon-right button-clear btn-dp-right btn-dp-right2 btn-top-icon-ser" ng-click="openSearch()">
+            </button>
+             <button class="button icon-right button-clear btn-dp-right btn-top-icon-add" ng-click="addWfs()">            
+            </button>
+    </ion-header-bar>
   <ion-content>
+  	<button></button>
   </ion-content>
 </ion-view>
